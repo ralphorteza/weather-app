@@ -11,5 +11,13 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-    }
+    },
+    "overrides": [
+      {
+        "files": ["bundle.js"],
+        "rules": {
+          "no-unused-expressions": "off"
+        }
+      }
+    ]
 }
