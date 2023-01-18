@@ -1,16 +1,34 @@
 import './style.css';
 import Weather from './weather';
 
-function init() {
+function loadWeatherInfo(weather) {
+  const city = document.querySelector('#city-name');
+  const currentTemp = document.querySelector('#current-temperature');
+  const currentWeatherType = document.querySelector('#current-weather-type');
+  const tempHighsLows = document.querySelector('#temp-highs-lows');
+
+  const feelsLike = document.querySelector('#feels-like');
+  const windSpeed = document.querySelector('#wind-speed');
+  const humidity = document.querySelector('#humidity');
+
+  city.textContent = weather.name;
+  currentTemp.textContent = `${weather.main.temp} °F`;
+  currentWeatherType.textContent = weather.weather[0].main;
+  tempHighsLows.textContent = `${weather.main.temp_max} / ${weather.main.temp_min}`;
+
+  feelsLike.textContent = weather.main.feels_like;
+  windSpeed.textContent = weather.wind.speed;
+  humidity.textContent = weather.main.humidity;
+}
+
+async function init() {
   const defaultSearch = 'san jose';
-  const weather = Weather.processedData(defaultSearch);
-  console.log(`city: ${weather.value}`);
+  const weather = await Weather.processedData(defaultSearch);
+  // console.log(`city: ${weather.main.temp}`);
+  loadWeatherInfo(weather);
 }
 
 function loadPage() {
-  // const searchQuery = document.querySelector('#simple-search');
-  // const weather = Weather.processedData(searchQuery);
-  // console.log(weather.city);
   init();
 }
 
@@ -18,7 +36,7 @@ loadPage();
 // async function init() {
 //   const initialURL = 'https://api.openweathermap.org/data/2.5/weather?q=san+jose&appid=056e2aa4b8b6e18688031d06515fe41c';
 //   const response = await fetch(initialURL, { mode: 'cors' });
-//   const weatherData = await response.json();
+//   const weather = await response.json();
 
 //   const city = document.querySelector('#city-name');
 //   const currentTemp = document.querySelector('#current-temperature');
@@ -29,14 +47,14 @@ loadPage();
 //   const windSpeed = document.querySelector('#wind-speed');
 //   const humidity = document.querySelector('#humidity');
 
-//   city.textContent = weatherData.name;
-//   currentTemp.textContent = weatherData.main.temp;
-//   currentWeatherType.textContent = weatherData.weather[0].main;
-//   tempHighsLows.textContent = `${weatherData.main.temp_max} / ${weatherData.main.temp_min}`;
+//   city.textContent = weather.name;
+//   currentTemp.textContent = weather.main.temp;
+//   currentWeatherType.textContent = weather.weather[0].main;
+//   tempHighsLows.textContent = `${weather.main.temp_max} / ${weather.main.temp_min}`;
 
-//   feelsLike.textContent = weatherData.main.feels_like;
-//   windSpeed.textContent = weatherData.wind.speed;
-//   humidity.textContent = weatherData.main.humidity;
+//   feelsLike.textContent = weather.main.feels_like;
+//   windSpeed.textContent = weather.wind.speed;
+//   humidity.textContent = weather.main.humidity;
 // }
 
 // init();
