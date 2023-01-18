@@ -29,10 +29,8 @@ async function init() {
 
 async function searchHandler() {
   const searchedCity = document.querySelector('#simple-search').value;
-  console.log(searchedCity);
   const weather = await Weather.processedData(searchedCity);
   loadWeatherInfo(weather);
-  console.log(`new city searched: ${weather.name}`);
 }
 
 function loadSearchQuery() {
